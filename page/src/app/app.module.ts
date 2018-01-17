@@ -3,7 +3,6 @@ import { NgModule } from '@angular/core';
 
 
 import { AppComponent } from './app.component';
-import { NavigationComponent } from './component/navigation/navigation.component';
 import { MenuComponent } from './component/menu/menu.component';
 import { LayoutComponent } from './component/layout/layout.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -12,11 +11,11 @@ import { LoginComponent } from './dashboard/login/login.component';
 import { FormsModule } from '@angular/forms';
 import { NavbarComponent } from './component/navbar/navbar.component';
 import { ErrorsComponent, NotFound, PermissionDenied, InternalError } from './component/errors/errors.component';
+import { BreadcrumbsComponent } from './component/breadcrumbs/breadcrumbs.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    NavigationComponent,
     MenuComponent,
     LayoutComponent,
     DashboardComponent,
@@ -26,7 +25,8 @@ import { ErrorsComponent, NotFound, PermissionDenied, InternalError } from './co
     ErrorsComponent,
     NotFound,
     PermissionDenied,
-    InternalError
+    InternalError,
+    BreadcrumbsComponent,
   ],
   imports: [
     BrowserModule,

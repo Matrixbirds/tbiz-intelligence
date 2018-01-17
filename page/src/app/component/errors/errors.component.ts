@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./errors.component.scss']
 })
 export class ErrorsComponent implements OnInit {
-  msg: String = 'unknown error'
+  msg: String = 'UNKNOWN ERROR'
 
   constructor() {
   }
@@ -22,7 +22,7 @@ export class ErrorsComponent implements OnInit {
   styleUrls: ['./errors.component.scss']
 })
 export class NotFound extends ErrorsComponent implements OnInit {
-  msg: String = 'not found'
+  msg: String = '404 NOT FOUND'
 }
 
 @Component({
@@ -31,7 +31,7 @@ export class NotFound extends ErrorsComponent implements OnInit {
   styleUrls: ['./errors.component.scss']
 })
 export class PermissionDenied extends ErrorsComponent implements OnInit {
-  msg: String = 'permission denied'
+  msg: String = '401 PERMISSION DENIED'
 }
 
 @Component({
@@ -40,5 +40,5 @@ export class PermissionDenied extends ErrorsComponent implements OnInit {
   styleUrls: ['./errors.component.scss']
 })
 export class InternalError extends ErrorsComponent implements OnInit {
-  msg: String = 'internal error'
+  msg: String = '500 INTERNAL ERROR'
 }

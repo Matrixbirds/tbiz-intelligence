@@ -12,8 +12,6 @@
     <li class="divider"></li>
     <li *ngFor="let item of menus"
         class="menu-item">
-        <div class="menu-badge">
-        </div>
         <a routerLink="{{item.path}}">
             <i class="icon icon-link"></i> {{item.title}}
         </a>

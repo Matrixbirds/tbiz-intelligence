@@ -1,0 +1,14 @@
+:host {
+    height: 3.0em;
+    display: flex;
+    .navbar {
+        flex: 1;
+        box-shadow: 0 0.05rem 0.2rem rgba(69, 77, 93, .3);
+        padding-left: +.4rem;
+        padding-right: +.4rem;
+    }
+}
+
+.column {
+    padding: .4rem;
+}
