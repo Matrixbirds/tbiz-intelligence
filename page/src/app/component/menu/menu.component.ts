@@ -23,6 +23,31 @@ export class MenuComponent implements OnInit {
       title: '登录',
       path: '/login',
       i18n: 'login'
+    },
+    {
+      title: '数据源',
+      path: '/dashboard/data_source',
+      i18n: 'data_source'
+    },
+    {
+      title: '图表库',
+      path: '/dashboard/charts',
+      i18n: 'charts'
+    },
+    {
+      title: '文章库',
+      path: '/dashboard/articles',
+      i18n: 'articles'
+    },
+    {
+      title: '权限列表',
+      path: '/dashboard/permissions',
+      i18n: 'permissions'
+    },
+    {
+      title: 'SQL编辑器',
+      path: '/dashboard/sql_editor',
+      i18n: 'sql_editor'
     }
   ]
 

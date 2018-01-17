@@ -11,6 +11,7 @@ import { DashboardComponent, MetricsComponent } from './dashboard/dashboard.comp
 import { LoginComponent } from './dashboard/login/login.component';
 import { FormsModule } from '@angular/forms';
 import { NavbarComponent } from './component/navbar/navbar.component';
+import { ErrorsComponent, NotFound, PermissionDenied, InternalError } from './component/errors/errors.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,11 @@ import { NavbarComponent } from './component/navbar/navbar.component';
     DashboardComponent,
     LoginComponent,
     NavbarComponent,
-    MetricsComponent
+    MetricsComponent,
+    ErrorsComponent,
+    NotFound,
+    PermissionDenied,
+    InternalError
   ],
   imports: [
     BrowserModule,
