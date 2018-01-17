@@ -1,0 +1,19 @@
+<div class="login">
+  <div *ngFor="let item of fields"
+    class="form-group">
+    <label class="form-label" for="item.name">{{ item.name }}</label>
+    <input *ngIf="item === 'name'"
+      class="form-input"
+      type="text" placeholder="{{item}}"
+      [(ngModel)]="user[item]"/>
+    <input *ngIf="item === 'password'"
+      class="form-input"
+      type="password" placeholder="{{item}}"
+      [(ngModel)]="user[item]"/>
+  </div>
+  <button class="btn" (click)="signin()">登录</button>
+</div>
+
+<div class="back" (click)="back()">
+    <i class="fa fa-arrow-left" aria-hidden="true"></i>
+</div>

@@ -1,0 +1,4 @@
+@mixin flex-box($value) {
+    flex: $value;
+    display: flex;
+}

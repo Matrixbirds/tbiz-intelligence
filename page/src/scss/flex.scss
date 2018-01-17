@@ -1,0 +1,11 @@
+.flex, %flex {
+    @include flex-box(1);
+}
+
+.flex-left {
+    @include flex-box(0);
+}
+
+.flex-auto {
+    @include flex-box(auto);
+}

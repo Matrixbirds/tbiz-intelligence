@@ -1,0 +1,23 @@
+:host {
+    display: flex;
+    flex: 1;
+    align-items: center;
+    justify-content: center;
+}
+
+.login {
+    display: table;
+    .btn {
+        width: 100%;
+    }
+    width: 20%;
+}
+
+.back {
+    position: fixed;
+    left: 10%;
+    top: 15%;
+    :hover {
+        cursor: pointer;
+    }
+}

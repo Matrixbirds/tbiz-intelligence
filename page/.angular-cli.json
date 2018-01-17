@@ -19,8 +19,16 @@
       "testTsconfig": "tsconfig.spec.json",
       "prefix": "app",
       "styles": [
-        "styles.css"
+        "scss/styles.scss",
+        "../node_modules/spectre.css/dist/spectre.css",
+        "../node_modules/spectre.css/dist/spectre-exp.css",
+        "../node_modules/font-awesome/css/font-awesome.css"
       ],
+      "stylePreprocessorOptions": {
+        "includePaths": [
+            "src/scss"
+        ]
+      },
       "scripts": [],
       "environmentSource": "environments/environment.ts",
       "environments": {
@@ -54,7 +62,8 @@
     }
   },
   "defaults": {
-    "styleExt": "css",
-    "component": {}
+    "styleExt": "scss",
+    "component": {
+    }
   }
 }
