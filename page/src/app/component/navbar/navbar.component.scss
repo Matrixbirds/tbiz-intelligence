@@ -1,5 +1,5 @@
 :host {
-    height: 3.0em;
+    min-height: 3.0em;
     display: flex;
     .navbar {
         flex: 1;
@@ -7,6 +7,7 @@
         padding-left: +.4rem;
         padding-right: +.4rem;
     }
+    background: #fff;
 }
 
 .column {

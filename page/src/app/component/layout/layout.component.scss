@@ -1,5 +1,7 @@
 :host {
-    padding-left: 1em;
     display: flex;
     flex-direction: column;
+    top: 3.0em;
+    overflow: auto;
+    margin: 1em;
 }

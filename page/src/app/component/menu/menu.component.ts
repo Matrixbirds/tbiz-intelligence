@@ -20,11 +20,6 @@ export class MenuComponent implements OnInit {
       i18n: 'dashboard'
     },
     {
-      title: '登录',
-      path: '/login',
-      i18n: 'login'
-    },
-    {
       title: '数据源',
       path: '/dashboard/data_source',
       i18n: 'data_source'

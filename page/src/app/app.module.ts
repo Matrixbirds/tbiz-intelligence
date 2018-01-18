@@ -12,6 +12,7 @@ import { FormsModule } from '@angular/forms';
 import { NavbarComponent } from './component/navbar/navbar.component';
 import { ErrorsComponent, NotFound, PermissionDenied, InternalError } from './component/errors/errors.component';
 import { BreadcrumbsComponent } from './component/breadcrumbs/breadcrumbs.component';
+import { CardComponent } from './component/card/card.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { BreadcrumbsComponent } from './component/breadcrumbs/breadcrumbs.compon
     PermissionDenied,
     InternalError,
     BreadcrumbsComponent,
+    CardComponent,
   ],
   imports: [
     BrowserModule,

@@ -10,4 +10,6 @@ body {
 #app {
     display: flex;
     flex: 1;
+    overflow: hidden;
+    background: rgba(128, 128, 128, 0.12);
 }

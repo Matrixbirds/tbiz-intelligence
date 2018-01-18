@@ -1,0 +1,9 @@
+:host {
+    display: flex;
+    flex: auto;
+    padding: +.1em +.1em;
+    .card {
+        box-shadow: 0.1em 0.1em 0.1em #888;
+        flex: auto;
+    }
+}
