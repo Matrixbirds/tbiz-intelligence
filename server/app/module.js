@@ -1,17 +1,18 @@
 'use strict'
 
-function _resolver (path) {
+function load (path) {
     let module = require(path)
-    if (module &&
+    if (module && typeof module === 'function') return module()
+    return module
 }
 
 function resolveModule (modules, path='') {
     const declare = {}
     modules.reduce((append, item) => {
         if (typeof item === 'object') {
-            append[item.alias] = require(`${path}${item.name}`)
+            append[item.alias] = load(`${path}${item.name}`)
         } else {
-            append[item] = require(`${path}${item}`)
+            append[item] = load(`${path}${item}`)
         }
         return append
     }, declare)
@@ -21,7 +22,7 @@ function resolveModule (modules, path='') {
 const declare = resolveModule([
     'koa',
     'koa-bunyan-logger',
-    'koa-router'
+    'koa-router',
     'koa-bodyparser',
     '@koa/cors',
     'mount',
@@ -30,10 +31,10 @@ const declare = resolveModule([
     'fs',
     'util'
 ])
-const module = resolveModule([
+const Module = resolveModule([
     'models',
     'graphql',
-    'facilities'
+    'facilities',
     'env'
 ], './')
 
@@ -42,8 +43,8 @@ Object.assign(imports, declare)
 
 exports = module.exports = {
     declare,
-    module,
+    module: Module,
     imports,
-    providers: []
+    providers: [],
     resolveModule
 }
