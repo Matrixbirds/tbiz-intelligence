@@ -29,9 +29,7 @@ app.use(bodyParser({
 // app.use(routes.allowedMethods())
 
 if (process.env.NODE_ENV !== 'production') {
-    console.log('routeTable=====')
     // console.log(routes.stack.map(i => i.path))
-    console.log('routeTable=====')
 }
 
 // if (process.env.NODE_ENV === 'production') require('newrelic');

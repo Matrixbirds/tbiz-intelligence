@@ -26,6 +26,10 @@ const declare = resolveModule([
     'koa-bodyparser',
     '@koa/cors',
     'koa-graphql',
+    'bluebird',
+    'js-yaml',
+    'moment',
+    'axios',
     {name: 'lodash', alias: '_'},
     'fs',
     'util'

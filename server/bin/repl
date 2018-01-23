@@ -1,7 +1,6 @@
 #!/usr/bin/env node
-const Promise = require('bluebird').Promise
-const fs = require('fs')
-const jsYaml = require('js-yaml')
+const Module = require('../app/module').declare
+const Promise = Module.bluebird.Promise
 const mixin = Object.assign
 Promise.config({
     longStackTraces: false
@@ -12,9 +11,9 @@ if (require.main === module) {
     const repl = require('repl')
     const {context} = require('../app')
     mixin(context, {
-        moment: require('moment'),
-        Promise: require('bluebird').Promise,
-        axios: require('axios')
+        moment: Module.moment,
+        Promise,
+        axios: Module.axios
     })
     mixin(repl.start(':> ').context, context)
 }
