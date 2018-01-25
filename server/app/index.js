@@ -1,52 +1,57 @@
 'use strict'
 
-const _ = require('lodash')
-const models = require('./models')();
-const fs = require('fs');
+const path = require('path')
+global.loadModule = require(
+    path.join(__dirname, '../sprockets')
+).loadModule
 
-const koa = require('koa');
-const logger = require('koa-bunyan-logger');
-const Router = require('koa-router');
-const bodyParser = require('koa-bodyparser');
-const app = new koa();
-const env = require('./env');
-const util = require('util');
-const cors = require('@koa/cors');
+const sprockets = loadModule('sprockets')
+const Module = sprockets.imports
+const env = sprockets.env
+const {bluebird, mixin, _, defineProperty} = Module
 
-if (process.env.NODE_ENV !== 'test') {
-    app.use(logger());
-    app.use(logger.requestIdContext());
-    app.use(logger.requestLogger());
-}
-app.use(cors());
-app.use(bodyParser({
-    onerror: function (err, ctx) {
-        ctx.throw(422, 'body parser error', { errors: err });
+const _self = {}
+_.each(
+    [
+        {name: 'concerns', alias: 'concerns'},
+        {name: 'models', alias: 'models'},
+        {name: 'graphql', alias: 'graphql'},
+        {name: 'facilities', alias: 'facilities'}
+    ], ({name, alias}) => {
+        defineProperty(_self, alias, {
+            get () {
+                mixin(Module, {
+                    resolver: sprockets.resolver,
+                    env
+                })
+                return require(`../app/${name}`)(Module)
+            }
+        })
     }
-}));
+)
 
-// app.use(routes.routes())
-// app.use(routes.allowedMethods())
-
-if (process.env.NODE_ENV !== 'production') {
-    // console.log(routes.stack.map(i => i.path))
-}
-
-// if (process.env.NODE_ENV === 'production') require('newrelic');
-
-if (process.env.NODE_ENV !== 'test' && require.main === module) {
-    let listener = app.listen(env.port, () => {
-        console.log('Listenning on %s', listener.address().port);
-    });
-}
-
-const deps = {
-    context: {
-        app,
-        models,
-        env,
-        utils: require('./facilities')
+function entry({
+    koa, logger, router, bodyparser,
+    env, util, cors, facilities
+}) {
+    const app = new koa()
+    if (process.env.NODE_ENV !== 'test') {
+        app.use(logger())
+        .use(logger.requestIdContext())
+        .use(logger.requestLogger())
     }
+    app.use(cors())
+    .use(bodyparser({
+        onerror (err, ctx) {
+            ctx.throw(422, 'body parser error', { errors: err })
+        }
+    }))
+    if (process.env.NODE_ENV !== 'test' && require.main === module) {
+        let listener = app.listen(env.port, () => {
+            console.log('Listenning on %s', listener.address().port);
+        });
+    }
+    return mixin(arguments, {app})
 }
 
-module.exports = deps;
+module.exports = entry(Module)

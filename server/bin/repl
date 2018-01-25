@@ -1,21 +1,24 @@
 #!/usr/bin/env node
-const Module = require('../sprockets').declare
+const path = require('path')
+const sprockets = require(path.join(__dirname, '../sprockets'))
+const Module = sprockets.imports
+const {repl, os} = Module
+const env = sprockets.env
 const Promise = Module.bluebird.Promise
-const mixin = Object.assign
+const mixin = Module.mixin
+
 Promise.config({
     longStackTraces: false
 })
 
-if (!process.env.NODE_ENV) process.env.NODE_ENV = 'dev'
+!process.env.NODE_ENV && mixin(
+    process.env, {
+        NODE_ENV: 'development'
+    }
+)
+
 if (require.main === module) {
-    const repl = require('repl')
-    const {context} = require('../app')
-    mixin(context, {
-        moment: Module.moment,
-        Promise,
-        axios: Module.axios
-    })
-    mixin(repl.start(':> ').context, context)
+    startRepl()
 }
 
 process.on('uncaughException', (err) => {
@@ -25,3 +28,30 @@ process.on('uncaughException', (err) => {
 process.on('unhandleRejection', (err) => {
     console.error('unhandleRejection', err)
 })
+
+function startRepl () {
+    const biz = require('../app')
+    console.log('biz', biz)
+    mixin(biz, {
+        Module,
+        moment: Module.moment,
+        Promise,
+        env,
+        axios: Module.axios
+    })
+
+    const interface = os.networkInterfaces()
+    let matched
+    for (let key of Object.keys(interface)) {
+        if (key.match(/^e/)) {
+            matched = key
+            break
+        }
+    }
+    const ip = interface[matched][0].address
+    const {context} = repl.start(`[${ip}] :> `)
+    mixin(context, biz)
+    Object.keys(biz).forEach(prop => {
+        mixin(context, {[prop]: biz[prop]})
+    })
+}

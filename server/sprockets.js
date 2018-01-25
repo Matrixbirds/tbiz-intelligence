@@ -1,5 +1,7 @@
 'use strict'
 
+const mixin = Object.assign
+
 function load ({path, name}) {
     const fullpath = path ?
         require('path').join(__dirname, `${path}${name}`) :
@@ -39,34 +41,40 @@ function loadDeclare (filename) {
 const declare = resolveModule(
     loadDeclare('package.json')
 )
-//const declare = resolveModule([
-//    'koa',
-//    'koa-bunyan-logger',
-//    'koa-router',
-//    'koa-bodyparser',
-//    '@koa/cors',
-//    'koa-graphql',
-//    'bluebird',
-//    'js-yaml',
-//    'moment',
-//    'axios',
-//    {name: 'lodash', alias: '_'},
-//    'fs',
-//    'util'
-//])
-const Module = resolveModule([
-    'models',
-    'facilities',
-    'env',
-], 'app/')
 
-const imports = {}
+const imports = resolveModule(
+    [
+        'fs',
+        'path',
+        'os',
+        'repl'
+    ]
+)
 Object.assign(imports, declare)
+Object.assign(imports, {
+    mixin: Object.assign,
+    defineProperty: Object.defineProperty
+})
+
+const {path} = imports
+
+function loadModule (pathname) {
+    return require(path.join(__dirname, pathname))
+}
+
+function resolver ({pathname, path, pattern}) {
+    const {fs} = imports
+    return fs
+        .readdirSync(pathname)
+        .filter(e => e.match(pattern))
+}
 
 exports = module.exports = {
     declare,
-    module: Module,
+    env: require(path.join(__dirname, 'config.js')),
+    resolver,
     imports,
     providers: [],
-    resolveModule
+    resolveModule,
+    loadModule
 }
