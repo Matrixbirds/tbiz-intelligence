@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-const Module = require('../app/module').declare
+const Module = require('../sprockets').declare
 const Promise = Module.bluebird.Promise
 const mixin = Object.assign
 Promise.config({

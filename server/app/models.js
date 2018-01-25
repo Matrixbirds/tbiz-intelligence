@@ -1,6 +1,7 @@
 'use strict'
+const path = require('path')
 
-const env = require('./env')
+const env = require(path.join(__dirname, 'env'))
 
 const _ = require('lodash')
 
