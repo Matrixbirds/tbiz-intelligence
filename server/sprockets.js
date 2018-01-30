@@ -51,12 +51,14 @@ const imports = resolveModule(
     ]
 )
 Object.assign(imports, declare)
-Object.assign(imports, {
-    mixin: Object.assign,
-    defineProperty: Object.defineProperty
-})
 
 const {path} = imports
+
+Object.assign(imports, {
+    mixin: Object.assign,
+    defineProperty: Object.defineProperty,
+    env: require(path.join(__dirname, 'config.js'))
+})
 
 function loadModule (pathname) {
     return require(path.join(__dirname, pathname))
@@ -71,7 +73,7 @@ function resolver ({pathname, path, pattern}) {
 
 exports = module.exports = {
     declare,
-    env: require(path.join(__dirname, 'config.js')),
+    // env: require(path.join(__dirname, 'config.js')),
     resolver,
     imports,
     providers: [],

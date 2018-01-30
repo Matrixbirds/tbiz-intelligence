@@ -50,7 +50,9 @@ class AppError extends Error {
 
 const bizLog = util.debuglog(env)
 
-module.exports = {
-    AppError,
-    bizLog
+module.exports = $ => {
+    return {
+        AppError,
+        bizLog
+    }
 }

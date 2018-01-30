@@ -1,4 +1,5 @@
 base: &base
+    port: 6789
     debug: false
     secrets: '8c0a89fb4574b7426f3e4e96900d5f02462312605c3b698a1360463ad7bb7800130049a40eda5d6d974e364fcccd525bc08ed427d91d91487ae30d0063240e4d'
     redis:

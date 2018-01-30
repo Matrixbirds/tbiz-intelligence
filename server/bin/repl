@@ -3,7 +3,6 @@ const path = require('path')
 const sprockets = require(path.join(__dirname, '../sprockets'))
 const Module = sprockets.imports
 const {repl, os} = Module
-const env = sprockets.env
 const Promise = Module.bluebird.Promise
 const mixin = Module.mixin
 
@@ -31,26 +30,26 @@ process.on('unhandleRejection', (err) => {
 
 function startRepl () {
     const biz = require('../app')
-    console.log('biz', biz)
     mixin(biz, {
         Module,
         moment: Module.moment,
         Promise,
-        env,
-        axios: Module.axios
+        env: Module.env,
+        axios: Module.axios,
+        graphql: Module.graphql
     })
 
     const interface = os.networkInterfaces()
     let matched
     for (let key of Object.keys(interface)) {
-        if (key.match(/^e/)) {
+        if (key.match(/^(e|w)/)) {
             matched = key
             break
         }
     }
     const ip = interface[matched][0].address
     const {context} = repl.start(`[${ip}] :> `)
-    mixin(context, biz)
+    mixin(context, Module)
     Object.keys(biz).forEach(prop => {
         mixin(context, {[prop]: biz[prop]})
     })
