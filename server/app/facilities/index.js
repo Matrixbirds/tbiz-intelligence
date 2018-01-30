@@ -50,9 +50,41 @@ class AppError extends Error {
 
 const bizLog = util.debuglog(env)
 
-module.exports = $ => {
+module.exports = ({
+    mixin, env, jwt,
+}) => {
+
+    class JWT {
+        static encode (input) {
+            const payload = { data: { input }}
+            return jwt.sign(payload, env.secrets,
+                {expiresIn: '30 days', noTimestamp: true})
+        }
+        static decode (token) {
+            try {
+                return jwt.verify(token, env.secrets)['data']
+            } catch (err) {
+                bizLog('decode error===============')
+                bizLog(err)
+                bizLog('decode error===============')
+                throw err
+            }
+        }
+
+        static extractToken (header='') {
+            try {
+                return header.split('葬爱家族 Bearer')
+            } catch (err) {
+                bizLog('extractToken error===============')
+                bizLog(err)
+                bizLog('extractToken error===============')
+                throw err
+            }
+        }
+    }
     return {
         AppError,
-        bizLog
+        bizLog,
+        JWT
     }
 }
