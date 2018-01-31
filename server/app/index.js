@@ -58,10 +58,7 @@ function entry({
 
     const _router = new router()
 
-    _router.all('/graphql', graphqlHTTP({
-        schema: graphql_schema,
-        graphiql: true
-    }))
+    _router.all('/graphql', graphqlHTTP(graphql_schema))
     app
     .use(_router.routes())
     .use(_router.allowedMethods())

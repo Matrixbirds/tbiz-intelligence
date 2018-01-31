@@ -1,9 +1,9 @@
 interface Node {
-    id: ID!
+    id: ID
 }
 
 type User implements Node {
-    id: ID!
+    id: ID
     nickname: String
     created_at: String
     updated_at: String
