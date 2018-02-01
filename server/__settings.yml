@@ -7,37 +7,22 @@ base: &base
     secrets: '8c0a89fb4574b7426f3e4e96900d5f02462312605c3b698a1360463ad7bb7800130049a40eda5d6d974e364fcccd525bc08ed427d91d91487ae30d0063240e4d'
     redis:
         url: 'redis://0.0.0.0:8000/2'
-        prefix: 'QMTV_DATAPLATFORM:DEV'
-    rpc_config:
-        host: '127.0.0.1'
-        port: '9900'
-        name: 'mis-dev'
+        prefix: 'tbiz-intelligence'
     dbs:
-        mysql:
-            db_config:
-                host: 0.0.0.0
-                port: 8001
-                user: root
-                password:
-                database: db_config
-                charset: 'utf8'
-        pg:
-            postgres:
-                connection:
-                    host: 127.0.0.1
-                    port: 9003
-                    user: postgres
-                    password: qazwsx12
-                    database: postgres
-                    charset: 'utf8'
-                pool:
-                    min: 2
-                    max: 5
-                debug: true
-                migrations:
-                    tableName: data_knex
-            ebug: true
-
+        client: mysql
+        connection:
+            host: 127.0.0.1
+            port: 3306
+            user: root
+            password:
+            database: db_config
+            charset: 'utf8'
+        pool:
+            min: 2
+            max: 5
+        debug: true
+        migrations:
+            tableName: knex_migrate
 development:
     <<: *base
 
